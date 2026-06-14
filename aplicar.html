@@ -14,233 +14,39 @@ body{background:var(--black);color:var(--bone);font-family:var(--sans);font-weig
 a{color:inherit;text-decoration:none}
 .grain{position:fixed;inset:0;z-index:3;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .aura{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(60% 50% at 50% 30%,rgba(120,140,180,.07),transparent 60%)}
-/* nav */
 nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:22px 30px}
 nav .logo{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:500}.logo img{width:22px;height:22px}.logo sup{font-size:.5em;color:var(--dim)}
 nav .back{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:inline-flex;align-items:center;gap:8px;transition:.3s}
 nav .back:hover{color:var(--bone);gap:12px}
-/* progreso */
-.prog{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(255,255,255,.06);z-index:41}
-.prog i{display:block;height:100%;width:0;background:var(--bone);transition:width .5s var(--ease)}
-/* escenario del form */
-.stage{position:relative;max-width:680px;margin:0 auto;min-height:100vh;display:flex;align-items:center;padding:90px 30px}
-.steps{position:relative;width:100%}
-.step{position:absolute;left:0;right:0;top:50%;opacity:0;transform:translateY(40px);filter:blur(6px);pointer-events:none;transition:opacity .6s var(--ease),transform .6s var(--ease),filter .6s var(--ease)}
-.step.active{position:relative;top:auto;opacity:1;transform:none;filter:blur(0);pointer-events:auto}
-.step.prev{transform:translateY(-40px)}
-.q .n{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--dim);display:inline-flex;align-items:center;gap:9px;margin-bottom:16px}
-.q .n::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--bone)}
-.q h2{font-weight:500;font-size:clamp(24px,3.4vw,38px);letter-spacing:-.025em;line-height:1.12}
-.q .help{color:var(--dim);font-size:15px;margin-top:12px;max-width:48ch}
-.q .field{margin-top:30px}
-.q input,.q textarea{width:100%;background:transparent;border:none;border-bottom:1.5px solid #2a2a2e;padding:12px 2px;color:var(--bone);font-family:var(--sans);font-size:clamp(20px,2.4vw,26px);font-weight:300;outline:none;transition:.3s var(--ease)}
-.q textarea{resize:none;min-height:64px;line-height:1.4}
-.q input::placeholder,.q textarea::placeholder{color:#4a463e}
-.q input:focus,.q textarea:focus{border-color:var(--bone)}
-/* opciones */
-.opts{margin-top:30px;display:flex;flex-direction:column;gap:11px}
-.opt{display:flex;align-items:center;gap:14px;padding:15px 18px;border:1px solid #1f1f22;border-radius:13px;background:rgba(255,255,255,.015);cursor:pointer;transition:.28s var(--ease);font-size:16px}
-.opt:hover{border-color:#3a3a40;background:rgba(255,255,255,.04);transform:translateX(3px)}
-.opt.sel{border-color:var(--bone);background:rgba(255,255,255,.06)}
-.opt .k{width:26px;height:26px;border-radius:7px;border:1px solid #34343a;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--dim);flex-shrink:0;transition:.28s}
-.opt.sel .k,.opt:hover .k{border-color:var(--bone);color:var(--bone)}
-/* acciones */
-.act{margin-top:32px;display:flex;align-items:center;gap:16px}
-.btn{background:var(--bone);color:#000;font-size:15px;font-weight:500;padding:13px 26px;border-radius:100px;border:none;cursor:pointer;font-family:var(--sans);display:inline-flex;align-items:center;gap:10px;transition:.4s var(--ease)}
+/* pantalla plazas llenas */
+.closed{position:relative;z-index:5;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 26px 90px;max-width:640px;margin:0 auto}
+.closed .n{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);display:inline-flex;align-items:center;gap:9px;margin-bottom:24px}
+.closed .n::before{content:"";width:6px;height:6px;border-radius:50%;background:#c98b7a;box-shadow:0 0 8px rgba(201,139,122,.6)}
+.closed h1{font-weight:500;font-size:clamp(40px,7vw,68px);letter-spacing:-.035em;line-height:1.02}
+.closed p{color:var(--dim);font-size:clamp(16px,2.2vw,19px);margin-top:24px;max-width:44ch;line-height:1.6}
+.closed p b{color:var(--bone);font-weight:400}
+.closed .act{margin-top:42px}
+.btn{background:var(--bone);color:#000;font-size:15px;font-weight:500;padding:15px 30px;border-radius:100px;border:none;cursor:pointer;font-family:var(--sans);display:inline-flex;align-items:center;gap:11px;transition:.4s var(--ease)}
 .btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px -14px rgba(239,234,224,.4)}
-.hint{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--faint)}
-.hint b{color:var(--dim);font-weight:400}
-.err{color:#c98b7a;font-size:13px;margin-top:12px;min-height:16px;opacity:0;transition:.3s}
-.err.show{opacity:1}
-/* paso de reserva (cal) */
-.book{opacity:0;transform:translateY(40px);filter:blur(6px);pointer-events:none;transition:opacity .7s var(--ease),transform .7s var(--ease),filter .7s var(--ease);max-width:980px;margin:0 auto;padding:110px 24px 70px}
-.book.active{opacity:1;transform:none;filter:blur(0);pointer-events:auto}
-.book .head{text-align:center;max-width:620px;margin:0 auto 34px}
-.book .n{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--dim);display:inline-flex;align-items:center;gap:9px;margin-bottom:16px}
-.book .n::before{content:"";width:6px;height:6px;border-radius:50%;background:#7cd49a;box-shadow:0 0 7px rgba(124,212,154,.6)}
-.book h2{font-weight:500;font-size:clamp(28px,4vw,48px);letter-spacing:-.03em;line-height:1.05}
-.book h2 .l2{color:var(--dim);font-weight:400}
-.book p{color:var(--dim);font-size:16px;margin-top:16px}
-.recap{max-width:620px;margin:0 auto 26px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-.recap span{font-size:12px;color:var(--dim);background:#121214;border:1px solid #1f1f22;border-radius:8px;padding:7px 12px}
-.recap span b{color:var(--bone);font-weight:500}
-#cal{min-height:560px;border-radius:16px;overflow:hidden;border:1px solid #1b1b1e;background:#0a0a0b}
-.calnote{max-width:620px;margin:18px auto 0;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--faint)}
-@media(max-width:600px){.stage{padding:80px 22px}.act{flex-wrap:wrap}}
+.closed .sub{margin-top:22px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--faint)}
+@media(max-width:600px){.closed{padding:110px 22px 70px}}
 </style></head>
 <body>
 <div class="grain"></div><div class="aura"></div>
-<div class="prog"><i id="bar"></i></div>
 <nav>
   <a href="index.html" class="logo"><img src="assets/logos/Recurso%2011.png" alt="">InfoCapitals<sup>®</sup></a>
   <a href="index.html" class="back">← Volver</a>
 </nav>
 
-<!-- FORMULARIO TIPO TYPEFORM -->
-<section class="stage" id="stage">
-  <div class="steps" id="steps">
-
-    <div class="step active" data-key="nombre" data-type="text" data-required="1">
-      <div class="q">
-        <div class="n">01</div>
-        <h2>Para empezar, ¿cómo te llamas?</h2>
-        <div class="field"><input type="text" placeholder="Tu nombre y apellido" autocomplete="name"></div>
-        <div class="err"></div>
-        <div class="act"><button class="btn">Ok →</button><span class="hint">pulsa <b>Enter ↵</b></span></div>
-      </div>
-    </div>
-
-    <div class="step" data-key="email" data-type="email" data-required="1">
-      <div class="q">
-        <div class="n">02</div>
-        <h2>¿A qué email te escribimos?</h2>
-        <div class="help">Lo usamos para confirmarte la llamada. Nada de spam.</div>
-        <div class="field"><input type="email" placeholder="tu@email.com" autocomplete="email"></div>
-        <div class="err"></div>
-        <div class="act"><button class="btn">Ok →</button><span class="hint">pulsa <b>Enter ↵</b></span></div>
-      </div>
-    </div>
-
-    <div class="step" data-key="negocio" data-type="text" data-required="1">
-      <div class="q">
-        <div class="n">03</div>
-        <h2>¿Cuál es tu negocio?</h2>
-        <div class="help">Tu @ de Instagram, tu canal o tu web.</div>
-        <div class="field"><input type="text" placeholder="@tuusuario o tuweb.com"></div>
-        <div class="err"></div>
-        <div class="act"><button class="btn">Ok →</button><span class="hint">pulsa <b>Enter ↵</b></span></div>
-      </div>
-    </div>
-
-    <div class="step" data-key="facturacion" data-type="choice">
-      <div class="q">
-        <div class="n">04</div>
-        <h2>¿Cuánto factura tu negocio al mes?</h2>
-        <div class="opts">
-          <div class="opt"><span class="k">A</span>Menos de €3.000</div>
-          <div class="opt"><span class="k">B</span>€3.000 – 10.000</div>
-          <div class="opt"><span class="k">C</span>€10.000 – 30.000</div>
-          <div class="opt"><span class="k">D</span>Más de €30.000</div>
-        </div>
-        <div class="err"></div>
-      </div>
-    </div>
-
-    <div class="step" data-key="inicio" data-type="choice">
-      <div class="q">
-        <div class="n">05</div>
-        <h2>¿Cuándo querrías empezar?</h2>
-        <div class="opts">
-          <div class="opt"><span class="k">A</span>Lo antes posible</div>
-          <div class="opt"><span class="k">B</span>Este mes</div>
-          <div class="opt"><span class="k">C</span>Solo estoy explorando</div>
-        </div>
-        <div class="err"></div>
-      </div>
-    </div>
-
-    <div class="step" data-key="objetivo" data-type="textarea" data-required="1">
-      <div class="q">
-        <div class="n">06</div>
-        <h2>¿Qué quieres conseguir?</h2>
-        <div class="help">Cuéntanos tu objetivo y dónde sientes que estás atascado.</div>
-        <div class="field"><textarea rows="2" placeholder="Escribe aquí…"></textarea></div>
-        <div class="err"></div>
-        <div class="act"><button class="btn">Ver horarios →</button><span class="hint">pulsa <b>Enter ↵</b></span></div>
-      </div>
-    </div>
-
+<section class="closed">
+  <div class="n">Convocatoria</div>
+  <h1>Plazas llenas</h1>
+  <p>Ahora mismo no quedan plazas disponibles. Trabajamos con un número limitado de clientes para cuidar cada resultado.</p>
+  <p><b>Escríbenos para reservar la próxima.</b></p>
+  <div class="act">
+    <a class="btn" href="https://instagram.com/guillermohef" target="_blank" rel="noopener">Escríbenos por Instagram →</a>
   </div>
+  <div class="sub">@guillermohef</div>
 </section>
 
-<!-- PASO FINAL: ELEGIR HORA EN CAL.COM (con respuestas prerellenadas) -->
-<section class="book" id="book">
-  <div class="head">
-    <div class="n">Último paso</div>
-    <h2>Elige tu hora <span class="l2">y listo.</span></h2>
-    <p>Tus respuestas ya están guardadas. Solo escoge el hueco que mejor te venga.</p>
-  </div>
-  <div class="recap" id="recap"></div>
-  <div id="cal"></div>
-  <div class="calnote">Tus respuestas viajan con la reserva — no tienes que repetirlas.</div>
-</section>
-
-<script>
-const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
-const steps=[...$$('.step')],bar=$('#bar'),book=$('#book');
-const answers={};let i=0;
-
-function show(n){
-  steps.forEach((s,x)=>{s.classList.remove('active','prev');if(x===n)s.classList.add('active');else if(x<n)s.classList.add('prev');});
-  bar.style.width=((n)/(steps.length))*100+'%';
-  const inp=steps[n].querySelector('input,textarea');if(inp)setTimeout(()=>inp.focus(),420);
-}
-function err(step,msg){const e=step.querySelector('.err');e.textContent=msg;e.classList.add('show');}
-function clrErr(step){const e=step.querySelector('.err');e.classList.remove('show');}
-
-function validate(step){
-  const type=step.dataset.type,req=step.dataset.required;
-  if(type==='choice'){const sel=step.querySelector('.opt.sel');if(!sel){err(step,'Elige una opción.');return null;}return sel.textContent.replace(/^[A-D]/,'').trim();}
-  const inp=step.querySelector('input,textarea');const v=(inp.value||'').trim();
-  if(req&&!v){err(step,'Este campo es necesario.');return null;}
-  if(type==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){err(step,'Pon un email válido.');return null;}
-  return v;
-}
-
-function next(){
-  const step=steps[i];const val=validate(step);
-  if(val===null)return;
-  answers[step.dataset.key]=val;clrErr(step);
-  if(i<steps.length-1){i++;show(i);}else finish();
-}
-function back(){if(i>0){i--;show(i);}}
-
-steps.forEach(step=>{
-  const btn=step.querySelector('.btn');if(btn)btn.addEventListener('click',next);
-  step.querySelectorAll('.opt').forEach(o=>o.addEventListener('click',()=>{
-    step.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));o.classList.add('sel');clrErr(step);
-    answers[step.dataset.key]=o.textContent.replace(/^[A-D]/,'').trim();
-    setTimeout(next,260);
-  }));
-});
-
-addEventListener('keydown',e=>{
-  if(book.classList.contains('active'))return;
-  const step=steps[i];const ta=step.querySelector('textarea');
-  if(e.key==='Enter'){if(ta&&e.shiftKey)return;e.preventDefault();next();}
-  if(step.dataset.type==='choice'){const map={a:0,b:1,c:2,d:3};const idx=map[e.key.toLowerCase()];if(idx!=null){const opts=step.querySelectorAll('.opt');if(opts[idx])opts[idx].click();}}
-});
-
-/* ── PASO FINAL → CAL.COM ───────────────────────────────────────────────
-   Reemplaza CAL_LINK por tu enlace de Cal.com (p.ej. "infocapitals/llamada").
-   Las respuestas se prerellenan: name, email y un resumen en "notes",
-   así te llegan junto a la reserva y el prospecto no las recontesta. */
-const CAL_LINK="ghconsulting/30min";  // enlace de Cal.com
-
-function finish(){
-  bar.style.width='100%';
-  // recap visible
-  const recap=$('#recap');
-  const map={negocio:'Negocio',facturacion:'Facturación',inicio:'Empezar'};
-  recap.innerHTML=Object.keys(map).map(k=>answers[k]?`<span>${map[k]} · <b>${answers[k]}</b></span>`:'').join('');
-  // mostrar paso de reserva
-  document.querySelector('.stage').style.display='none';
-  book.classList.add('active');window.scrollTo({top:0});
-  initCal();
-}
-
-function initCal(){
-  if(CAL_LINK==="CAL_LINK"){
-    $('#cal').innerHTML='<div style="padding:60px 24px;text-align:center;color:#807A70;font-family:var(--mono);font-size:13px;line-height:1.8">Aquí irá el calendario de Cal.com.<br>Pon tu enlace en <b style="color:#EFEAE0">CAL_LINK</b> dentro de este archivo para activarlo.</div>';
-    return;
-  }
-  const notes=`Negocio: ${answers.negocio||'-'}\nFacturación: ${answers.facturacion||'-'}\nEmpezar: ${answers.inicio||'-'}\nObjetivo: ${answers.objetivo||'-'}`;
-  (function (C, A, L){let p=function(a,ar){a.q.push(ar);};let d=C.document;C.Cal=C.Cal||function(){let cal=C.Cal;let ar=arguments;if(!cal.loaded){cal.ns={};cal.q=cal.q||[];d.head.appendChild(d.createElement("script")).src=A;cal.loaded=true;}if(ar[0]===L){const api=function(){p(api,arguments);};const namespace=ar[1];api.q=api.q||[];if(typeof namespace==="string"){cal.ns[namespace]=cal.ns[namespace]||api;p(cal.ns[namespace],ar);p(cal,["initNamespace",namespace]);}else p(cal,ar);return;}p(cal,ar);};})(window,"https://app.cal.com/embed/embed.js","init");
-  Cal("init",{origin:"https://cal.com"});
-  Cal("inline",{elementOrSelector:"#cal",calLink:CAL_LINK,config:{name:answers.nombre||"",email:answers.email||"",notes:notes,theme:"dark"}});
-  Cal("ui",{theme:"dark",styles:{branding:{brandColor:"#EFEAE0"}},hideEventTypeDetails:false});
-}
-
-show(0);
-</script>
 </body></html>
